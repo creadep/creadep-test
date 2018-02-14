@@ -23,7 +23,10 @@ export const BooksListContainer = connect(
 
 
 export const BookContainer = connect(
-  (state) => ({data: state.openBook.info}),
+  (state) => ({
+    data: state.openBook.info,
+    isFetching: state.openBook.isFetching
+  }),
   (dispatch) => {
     return {
       fetchBookIfNeeded: (bookId) => dispatch(fetchBookIfNeeded(bookId))

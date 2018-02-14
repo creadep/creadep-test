@@ -5,15 +5,32 @@ import { Link } from "react-router-dom";
 export default class Book extends Component {
   constructor(props) {
     super(props);
+    this.state = {data: null}
   }
 
   componentWillMount() {
-    const bookId = this.props.match.params.id
-    this.props.fetchBookIfNeeded(bookId)
+    console.log('will mount', this.state, this.props)
+    const routeBookId = this.props.match.params.id
+
+    if (this.props.data && this.props.data.id === routeBookId) {
+      this.setState({data: this.props.data})
+    } else {
+      this.props.fetchBookIfNeeded(routeBookId)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('will receive props', this.state, this.props, nextProps)
+
+    // if (nextProps.data && this.props.data['id'] !== nextProps.data['id']) {
+    //   this.setState({data: nextProps.data})
+    // }
   }
 
   render() {
-    const data = this.props.data
+    console.log('book render')
+    const { isFetching } = this.props
+    const data = this.state.data
 
     const content = () => {
       if (data) {
@@ -33,7 +50,7 @@ export default class Book extends Component {
         <section>
           <div className="title">
             <Link to='/books'>Books</Link>&nbsp;/&nbsp;
-              <h2>{data && data.title}</h2>
+              <h2>{data && !isFetching && data.title}</h2>
           </div>
           <div className="content">
             {content()}

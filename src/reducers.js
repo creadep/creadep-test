@@ -26,7 +26,7 @@ const openBook = (state = {
 }, action) => {
   switch (action.type) {
     case 'FETCH_BOOK':
-      return Object.assign({}, state, {isFetching: true})
+      return Object.assign({}, state, {isFetching: true, infod: null})
 
     case 'RECEIVE_BOOK':
       return Object.assign({}, state, {
