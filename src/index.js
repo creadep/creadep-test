@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { BooksListContainer, AuthorsListContainer, AuthorContainer, BookContainer } from './components/components';
+import { BooksListContainer, AuthorsListContainer, AuthorContainer, BookContainer } from './containers';
 import Home from './components/home';
 import { createStore, applyMiddleware } from "redux";
 import { createLogger } from "redux-logger";
@@ -14,30 +14,6 @@ const store = createStore(
   rootReducer,
   applyMiddleware(thunk, createLogger())
 )
-
-window._store = store;
-
-
-/*
-booksList
-  items: [Book]
-  receivedAt: Date
-
-authorsList
-  items: [Author]
-  receivedAt: Date
-
-openAuthor
-  info
-  books
-
-openBook
-  info
-
-favorites
-  books: [ids]
-  authors: [ids]
-*/
 
 const RouterRoot = () => {
   return (

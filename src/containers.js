@@ -5,11 +5,11 @@ import {
   fetchBookIfNeeded,
   fetchAuthorsIfNeeded,
   fetchAuthorIfNeeded
-} from "../actions";
-import BooksList from './books-list';
-import Book from "./book";
-import AuthorsList from './authors-list';
-import Author from './author';
+} from "./actions";
+import BooksList from './components/books-list';
+import Book from "./components/book";
+import AuthorsList from './components/authors-list';
+import Author from './components/author';
 
 
 export const BooksListContainer = connect(
