@@ -3,3 +3,5 @@ books.sqlite
 .idea/
 npm-debug.log*
 .vscode/
+/public/main.css
+/public/bundle.js
