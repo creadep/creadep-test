@@ -1,0 +1,74 @@
+@import 'normalize.css/normalize';
+
+body {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  padding: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #8163e0;
+
+  &:hover { color: #c53c3c;}
+}
+
+h1 {
+  text-align: center;
+  font-size: 1em;
+  font-weight: normal;
+  color: #555;
+  margin: 0 0 40px;
+}
+
+.books-list, .authors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 18px;
+
+  li {
+    margin: 0 0 20px;
+  }
+
+  h3 {
+    display: inline;
+    margin: 0;
+    font-weight: normal;
+    font-size: 1em;
+  }
+
+  small {
+    font-size: 14px;
+  }
+}
+
+.title {
+  font-size: 2em;
+  margin: 0 0 0.5em;
+  font-weight: normal;
+
+  h2 {
+    display: inline;
+    margin: 0;
+    font-size: inherit;
+    font-weight: normal;
+  }
+}
+
+section {
+  margin: 0 0 3em;
+}
+
+.content {
+  margin: 0 0 0 20px;
+}
+
+.author-books-list {
+  margin: -0.5em 0 0;
+  padding: 0 0 0 1.5em;
+
+  li {
+    margin: 0 0 0.5em;
+  }
+}
