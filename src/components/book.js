@@ -10,21 +10,25 @@ export default class Book extends Component {
 
   componentWillMount() {
     console.log('will mount', this.state, this.props)
-    const routeBookId = this.props.match.params.id
-
-    if (this.props.data && this.props.data.id === routeBookId) {
-      this.setState({data: this.props.data})
-    } else {
-      this.props.fetchBookIfNeeded(routeBookId)
-    }
+    this.controlDataSet(this.props)
   }
 
   componentWillReceiveProps(nextProps) {
     console.log('will receive props', this.state, this.props, nextProps)
+    this.controlDataSet(nextProps)
+  }
 
-    // if (nextProps.data && this.props.data['id'] !== nextProps.data['id']) {
-    //   this.setState({data: nextProps.data})
-    // }
+  controlDataSet(props) {
+    const routeId = props.match.params.id
+    const dataIsCorrect = () => !!props.data && props.data.id.toString() === routeId.toString()
+
+    if (dataIsCorrect()) {
+      if (!this.state.data || this.state.data.id !== props.data.id) {
+        this.setState({data: props.data})
+      }
+    } else {
+      props.fetchBookIfNeeded(routeId)
+    }
   }
 
   render() {
@@ -41,7 +45,7 @@ export default class Book extends Component {
           </div>
         )
       } else {
-        return <div><p>No data :( </p></div>
+        return <p>{isFetching ? 'Loading...' : 'No data.'}</p>
       }
     }
 
@@ -50,7 +54,7 @@ export default class Book extends Component {
         <section>
           <div className="title">
             <Link to='/books'>Books</Link>&nbsp;/&nbsp;
-              <h2>{data && !isFetching && data.title}</h2>
+            <h2>{!!data && data.title}</h2>
           </div>
           <div className="content">
             {content()}

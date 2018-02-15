@@ -21,7 +21,7 @@ class BooksList extends Component {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, isFetching } = this.props;
     const Item = this.Item;
 
     const content = () => {
@@ -32,7 +32,7 @@ class BooksList extends Component {
           </ul>
         )
       } else {
-        return <p>No data :( </p>
+        return <p>{isFetching ? 'Loading...' : 'No data.'}</p>
       }
     }
 

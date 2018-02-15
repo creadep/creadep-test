@@ -13,7 +13,10 @@ import Author from './components/author';
 
 
 export const BooksListContainer = connect(
-  (state) => ({data: state.booksList.items}),
+  (state) => ({
+    data: state.booksList.items,
+    isFetching: state.booksList.isFetching
+  }),
   (dispatch) => {
     return {
       fetchBooksIfNeeded: () => dispatch(fetchBooksIfNeeded())
@@ -36,7 +39,10 @@ export const BookContainer = connect(
 
 
 export const AuthorsListContainer = connect(
-  (state) => ({data: state.authorsList.items}),
+  (state) => ({
+    data: state.authorsList.items,
+    isFetching: state.authorsList.isFetching
+  }),
   (dispatch) => {
     return {
       fetchAuthorsIfNeeded: () => dispatch(fetchAuthorsIfNeeded())

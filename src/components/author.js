@@ -4,15 +4,36 @@ import { Link } from "react-router-dom";
 export default class Author extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      authorInfo: null,
+      authorBooks: null
+    }
   }
 
   componentWillMount() {
-    const authorId = this.props.match.params.id
-    this.props.fetchAuthorIfNeeded(authorId)
+    this.controlDataSet(this.props)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.controlDataSet(nextProps)
+  }
+
+  controlDataSet(props) {
+    const routeId = props.match.params.id
+    const dataIsCorrect = () => !!props.authorInfo && props.authorInfo.id.toString() === routeId.toString()
+
+    if (dataIsCorrect()) {
+      if (!this.state.authorInfo || this.state.authorInfo.id !== props.authorInfo.id) {
+        this.setState({ authorInfo: props.authorInfo, authorBooks: props.authorBooks })
+      }
+    } else {
+      props.fetchAuthorIfNeeded(routeId)
+    }
   }
 
   render() {
-    const {isFetching, authorInfo, authorBooks} = this.props
+    const { authorInfo, authorBooks } = this.state
+    const { isFetching } = this.props
 
     const BookItem = (props) => (
       <li key={props.id}>
@@ -21,9 +42,7 @@ export default class Author extends Component {
     )
 
     const content = () => {
-      if (isFetching) {
-        return <p>Loading...</p>
-      } else if (authorInfo && authorBooks) {
+      if (authorInfo && authorBooks) {
         return (
           <div>
             <p>Country: {authorInfo.country}</p>
@@ -34,7 +53,7 @@ export default class Author extends Component {
           </div>
         )
       } else {
-        return <p>No data :( </p>
+        return <p>{isFetching ? 'Loading...' : 'No data.'}</p>
       }
     }
 
